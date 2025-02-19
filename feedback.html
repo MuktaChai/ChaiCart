@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rate Chai Cart</title>
+    <style>
+        body {
+            background-color: #f8e1a1; /* Light yellow */
+            color: #5a3d2b; /* Chai brown */
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .stars {
+            font-size: 2em;
+            cursor: pointer;
+        }
+        .feedback-options {
+            display: none;
+            margin-top: 20px;
+        }
+        .submit-button {
+            display: none;
+            background-color: #5a3d2b;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 1.2em;
+            margin-top: 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Rate Your Chai Experience</h1>
+    <div class="stars">
+        ★ ★ ★ ★ ★
+    </div>
+    <div class="feedback-options">
+        <h2>Why did you give this rating?</h2>
+        <form id="feedback-form">
+            <div id="feedback-choices"></div>
+            <br>
+            <button type="submit" class="submit-button">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        const stars = document.querySelector('.stars');
+        const feedbackOptions = document.querySelector('.feedback-options');
+        const feedbackChoices = document.getElementById('feedback-choices');
+        const submitButton = document.querySelector('.submit-button');
+
+        stars.addEventListener('click', (event) => {
+            let rating = [...stars.children].indexOf(event.target) + 1;
+            if (rating === 0) return;
+
+            stars.innerHTML = '★ '.repeat(rating) + '☆ '.repeat(5 - rating);
+
+            let feedbackTexts = rating > 4 
+                ? ["Good chai", "Tasty chai", "Nice toast", "Crispy snacks"] 
+                : ["Too sweet chai", "Less milk chai", "Very milky chai", "Stale snacks", "Less crispy toast"];
+
+            feedbackChoices.innerHTML = feedbackTexts.map(text => 
+                `<label><input type="checkbox" name="feedback" value="${text}"> ${text}</label><br>`
+            ).join('');
+
+            feedbackOptions.style.display = 'block';
+            submitButton.style.display = 'block';
+        });
+
+        document.getElementById('feedback-form').addEventListener('submit', (event) => {
+            event.preventDefault();
+            alert('Thank you for your feedback!');
+        });
+    </script>
+
+</body>
+</html>
