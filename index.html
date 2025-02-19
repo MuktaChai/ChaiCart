@@ -10,27 +10,92 @@
             color: #5a3d2b; /* Chai brown */
             font-family: Arial, sans-serif;
             text-align: center;
+            margin: 0;
+            padding: 0;
         }
+
         .logo {
             font-size: 3em;
             font-weight: bold;
             color: #5a3d2b;
+            margin-top: 20px;
         }
+
         .logo span {
             color: #d4a017; /* Golden Yellow */
         }
+
         .tagline {
             font-size: 1.5em;
             margin-top: 10px;
             color: #5a3d2b;
         }
+
+        /* Fading Image Animation */
+        .hero-image {
+            width: 100%;
+            height: auto;
+            margin-top: 20px;
+            border-radius: 10px;
+            opacity: 0;
+            animation: fadeInOut 5s infinite;
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        /* Menu Icon */
         .menu-icon {
             font-size: 2em;
             cursor: pointer;
             position: absolute;
             top: 20px;
             right: 20px;
+            background: none;
+            border: none;
+            color: #5a3d2b;
         }
+
+        /* Sidebar Menu */
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            right: 0;
+            background-color: #5a3d2b;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            text-align: left;
+        }
+
+        .sidebar a {
+            padding: 15px;
+            text-decoration: none;
+            font-size: 20px;
+            color: white;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #d4a017;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Rate Us Button */
         .rate-button {
             display: inline-block;
             background-color: #5a3d2b;
@@ -41,22 +106,43 @@
             margin-top: 20px;
             border-radius: 5px;
         }
+
     </style>
 </head>
 <body>
 
-    <div class="menu-icon">☰</div>
+    <!-- Three-line Menu Icon -->
+    <button class="menu-icon" onclick="openMenu()">☰</button>
+
+    <!-- Sidebar Menu -->
+    <div id="sidebar" class="sidebar">
+        <a href="javascript:void(0)" class="close-btn" onclick="closeMenu()">×</a>
+        <a href="#">About Us</a>
+        <a href="#">Contact Us</a>
+        <a href="feedback.html">Rate Us</a>
+    </div>
+
     <div class="logo"><span>C</span>HAI <span>C</span>ART ☕</div>
     <div class="tagline">India's Favourite Break</div>
-    <img class="hero-image" src="chaicart.jpg" alt="Premium Street Tea" style="width: 100%; height: auto; border-radius: 10px;">
+    
+    <!-- Fading Image -->
+    <img class="hero-image" src="chaicart.jpeg" alt="Premium Kolkata Street Tea">
     
     <br>
     <a href="feedback.html">
-    <button style="background-color: #8B4513; color: white; padding: 10px 20px; border: none; cursor: pointer; font-size: 18px;">
-        ⭐ Rate Us
-    </button>
-</a>
+        <button class="rate-button">⭐ Rate Us</button>
+    </a>
 
+    <!-- JavaScript for Sidebar Menu -->
+    <script>
+        function openMenu() {
+            document.getElementById("sidebar").style.width = "250px";
+        }
+
+        function closeMenu() {
+            document.getElementById("sidebar").style.width = "0";
+        }
+    </script>
 
 </body>
 </html>
