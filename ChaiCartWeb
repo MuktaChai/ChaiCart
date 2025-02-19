@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chai Cart</title>
+    <style>
+        body {
+            background-color: #FFD700; /* Yellow */
+            color: #8B4513; /* Chai Brown */
+            font-family: 'Georgia', serif;
+            text-align: center;
+        }
+        .container {
+            padding: 50px;
+        }
+        h1 {
+            font-size: 50px;
+            color: #8B4513;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo {
+            width: 50px;
+            height: auto;
+        }
+        .nav-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            cursor: pointer;
+        }
+        .menu, .about, .contact {
+            background-color: white;
+            color: #8B4513;
+            padding: 15px;
+            margin: 20px;
+            border-radius: 10px;
+        }
+        .hero-image {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-icon">&#9776;</div>
+        <h1>
+            <img src="cutting-chai-logo.png" alt="Chai Logo" class="logo"> Chai Cart
+        </h1>
+        <img src="chai-street-scene.jpg" alt="Indian Street Chai Scene" class="hero-image">
+        <div class="menu">
+            <h2>Menu</h2>
+            <p>Masala Chai, Ginger Tea, Kulhad Chai, Snacks</p>
+        </div>
+        <div class="about">
+            <h2>About Us</h2>
+            <p>Authentic chai with a touch of love. Served hot with desi flavors.</p>
+        </div>
+        <div class="contact">
+            <h2>Contact Us</h2>
+            <p>Phone: +91 XXXXXXXXXX</p>
+            <p>Location: Street 123, Your City</p>
+        </div>
+    </div>
+</body>
+</html>
