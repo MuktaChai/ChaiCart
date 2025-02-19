@@ -3,79 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rate Chai Cart</title>
+    <title>Feedback - Chai Cart</title>
     <style>
         body {
-            background-color: #f8e1a1; /* Light yellow */
-            color: #5a3d2b; /* Chai brown */
             font-family: Arial, sans-serif;
+            background-color: #fff3cd;
             text-align: center;
         }
+        h1 {
+            color: #8B4513;
+            font-size: 2.5em;
+        }
         .stars {
-            font-size: 2em;
+            font-size: 30px;
             cursor: pointer;
+            color: #ccc;
+        }
+        .stars.selected, .stars:hover {
+            color: #ffcc00;
         }
         .feedback-options {
             display: none;
             margin-top: 20px;
         }
-        .submit-button {
-            display: none;
-            background-color: #5a3d2b;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            font-size: 1.2em;
-            margin-top: 20px;
-            border-radius: 5px;
-            cursor: pointer;
+        select {
+            padding: 10px;
+            font-size: 16px;
+        }
+        .moving-text {
+            font-size: 20px;
+            color: #8B4513;
+            animation: moveText 3s infinite alternate;
+        }
+        @keyframes moveText {
+            from { transform: translateX(-10px); }
+            to { transform: translateX(10px); }
         }
     </style>
 </head>
 <body>
-
-    <h1>Rate Your Chai Experience</h1>
-    <div class="stars">
-        ★ ★ ★ ★ ★
+    <h1>Rate Our Chai</h1>
+    <p class="moving-text">Your feedback makes our chai even better!</p>
+    <div>
+        <span class="stars" onclick="rateChai(1)">&#9733;</span>
+        <span class="stars" onclick="rateChai(2)">&#9733;</span>
+        <span class="stars" onclick="rateChai(3)">&#9733;</span>
+        <span class="stars" onclick="rateChai(4)">&#9733;</span>
+        <span class="stars" onclick="rateChai(5)">&#9733;</span>
     </div>
-    <div class="feedback-options">
-        <h2>Why did you give this rating?</h2>
-        <form id="feedback-form">
-            <div id="feedback-choices"></div>
-            <br>
-            <button type="submit" class="submit-button">Submit</button>
-        </form>
+    <div id="feedback-section" class="feedback-options">
+        <h2>Tell us more:</h2>
+        <select id="feedback-options">
+            <option>Select a reason</option>
+        </select>
+        <br><br>
+        <button onclick="submitFeedback()">Submit</button>
     </div>
-
+    
     <script>
-        const stars = document.querySelector('.stars');
-        const feedbackOptions = document.querySelector('.feedback-options');
-        const feedbackChoices = document.getElementById('feedback-choices');
-        const submitButton = document.querySelector('.submit-button');
-
-        stars.addEventListener('click', (event) => {
-            let rating = [...stars.children].indexOf(event.target) + 1;
-            if (rating === 0) return;
-
-            stars.innerHTML = '★ '.repeat(rating) + '☆ '.repeat(5 - rating);
-
-            let feedbackTexts = rating > 4 
-                ? ["Good chai", "Tasty chai", "Nice toast", "Crispy snacks"] 
-                : ["Too sweet chai", "Less milk chai", "Very milky chai", "Stale snacks", "Less crispy toast"];
-
-            feedbackChoices.innerHTML = feedbackTexts.map(text => 
-                `<label><input type="checkbox" name="feedback" value="${text}"> ${text}</label><br>`
-            ).join('');
-
-            feedbackOptions.style.display = 'block';
-            submitButton.style.display = 'block';
-        });
-
-        document.getElementById('feedback-form').addEventListener('submit', (event) => {
-            event.preventDefault();
-            alert('Thank you for your feedback!');
-        });
+        function rateChai(stars) {
+            let starElements = document.querySelectorAll('.stars');
+            starElements.forEach((star, index) => {
+                star.classList.toggle('selected', index < stars);
+            });
+            
+            let feedbackSection = document.getElementById('feedback-section');
+            let feedbackOptions = document.getElementById('feedback-options');
+            feedbackOptions.innerHTML = ""; // Clear previous options
+            feedbackSection.style.display = "block";
+            
+            if (stars < 4) {
+                let badFeedback = ["Too sweet chai", "Less milk chai", "Very milky chai", "Stale snacks", "Less crispy toast"];
+                badFeedback.forEach(option => {
+                    let opt = document.createElement("option");
+                    opt.textContent = option;
+                    feedbackOptions.appendChild(opt);
+                });
+            } else {
+                let goodFeedback = ["Good chai", "Tasty chai", "Nice toast", "Crispy snacks"];
+                goodFeedback.forEach(option => {
+                    let opt = document.createElement("option");
+                    opt.textContent = option;
+                    feedbackOptions.appendChild(opt);
+                });
+            }
+        }
+        
+        function submitFeedback() {
+            alert("Thank you for your feedback!");
+        }
     </script>
-
 </body>
 </html>
